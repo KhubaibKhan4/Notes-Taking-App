@@ -18,7 +18,7 @@
     <h2>Installation</h2>
     <ol>
       <li>Clone the repository to your local machine using the following command:</li>
-      <pre><code>git clone https://github.com/username/notes-taking-app.git</code></pre>
+      <pre><code>git clone https://github.com/KhubaibKhan4/Notes-Taking-App.git</code></pre>
       <li>Open the project in Android Studio</li>
       <li>Build and run the app on an emulator or physical device</li>
     </ol>
@@ -43,5 +43,5 @@
     <h2>Acknowledgments</h2>
     <ul>
       <li><a href="https://developer.android.com/docs">Android Documentation</a></li>
-      <li><a href="https://www.youtube.com/channel/UCVHFbqXqoYvEWM1Ddxl0QDg">Android Developers YouTube Channel</a></li>
+      <li><a href="https://www.youtube.com/channel/UCj6wLtpRYEcaiOpHl2d-Lgw">Codespacepro Tech</a></li>
     </ul>
