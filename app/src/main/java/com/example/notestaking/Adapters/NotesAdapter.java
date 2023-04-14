@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -48,6 +49,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 intent.putExtra("date", notesList.get(position).getDate());
                 intent.putExtra("id", notesList.get(position).getId());
                 view.getContext().startActivity(intent);
+            }
+        });
+
+        holder.notes_container.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(context, "Action Will Implemented Soon.", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
     }
