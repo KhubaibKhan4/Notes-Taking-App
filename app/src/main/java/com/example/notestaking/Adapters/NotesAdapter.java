@@ -1,6 +1,8 @@
 package com.example.notestaking.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notestaking.Models.Notes;
+import com.example.notestaking.NotesDetailedActivity;
 import com.example.notestaking.R;
 
 import java.util.List;
 
+@SuppressLint("RecyclerView")
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> {
     Context context;
     List<Notes> notesList;
@@ -35,6 +39,17 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         holder.title.setText(notesList.get(position).getTitle());
         holder.desc.setText(notesList.get(position).getDesc());
         holder.date.setText(notesList.get(position).getDate());
+        holder.notes_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NotesDetailedActivity.class);
+                intent.putExtra("title", notesList.get(position).getTitle());
+                intent.putExtra("description", notesList.get(position).getDesc());
+                intent.putExtra("date", notesList.get(position).getDate());
+                intent.putExtra("id", notesList.get(position).getId());
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -49,9 +64,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.title_txt);
-            desc = itemView.findViewById(R.id.desc_txt);
-            date = itemView.findViewById(R.id.textView_date);
+            title = itemView.findViewById(R.id.title_txt_detailed);
+            desc = itemView.findViewById(R.id.desc_txt_detailed);
+            date = itemView.findViewById(R.id.textView_date_detailed);
             notes_container = itemView.findViewById(R.id.notes_container);
         }
     }

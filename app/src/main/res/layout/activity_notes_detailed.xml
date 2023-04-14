@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardBackgroundColor="@color/white"
     android:id="@+id/notes_container"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
+    tools:context=".NotesDetailedActivity"
     android:layout_margin="8dp">
     <LinearLayout
         android:orientation="vertical"
