@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class NotesDetailedActivity extends AppCompatActivity {
     TextView notes_title, notes_desc, notes_date, notes_id;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -24,6 +26,7 @@ public class NotesDetailedActivity extends AppCompatActivity {
         notes_title = (TextView) findViewById(R.id.title_txt_detailed);
         notes_desc = (TextView) findViewById(R.id.desc_txt_detailed);
         notes_date = (TextView) findViewById(R.id.textView_date_detailed);
+
 
         notes_title.setText(title);
         notes_desc.setText(desc);

@@ -1,11 +1,15 @@
 package com.example.notestaking.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.notestaking.Common.DatabaseHelper;
 import com.example.notestaking.Models.Notes;
 import com.example.notestaking.NotesDetailedActivity;
 import com.example.notestaking.R;
@@ -23,6 +28,7 @@ import java.util.List;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> {
     Context context;
     List<Notes> notesList;
+    private AlertDialog dialog;
 
     public NotesAdapter(Context context, List<Notes> notesList) {
         this.context = context;
@@ -55,7 +61,65 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         holder.notes_container.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(context, "Action Will Implemented Soon.", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Delete Note")
+                        .setMessage("Do You Want to Delete this Note Permanently?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                DatabaseHelper databaseHelper = DatabaseHelper.getDB(context);
+                                databaseHelper.notesDao().deleteNotes(new Notes(notesList.get(position).getId(), notesList.get(position).getTitle(), notesList.get(position).getDesc(), notesList.get(position).getDate()));
+                                notesList.remove(position);
+                                notifyDataSetChanged();
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).setNeutralButton("Update", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_notes, null);
+                                builder.setView(dialogView);
+
+                                // get references to the EditText views and button
+                                EditText editTextTitle = dialogView.findViewById(R.id.edittext_title);
+                                EditText editTextDescription = dialogView.findViewById(R.id.edittext_description);
+                                Button buttonUpdate = dialogView.findViewById(R.id.button_update);
+
+                                // set the current note data to the EditText views
+                                editTextTitle.setText(notesList.get(position).getTitle());
+                                editTextDescription.setText(notesList.get(position).getDesc());
+
+                                // set the click listener for the update button
+                                buttonUpdate.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        DatabaseHelper databaseHelper = DatabaseHelper.getDB(context);
+
+                                        // get the updated note data from the EditText views
+                                        String updatedTitle = editTextTitle.getText().toString();
+                                        String updatedDescription = editTextDescription.getText().toString();
+
+                                        // update the current note with the new data
+                                        databaseHelper.notesDao().updateNotes(new Notes(notesList.get(position).getId(), updatedTitle, updatedDescription, notesList.get(position).getDate()));
+
+                                        // update the UI to reflect the changes
+                                        notifyDataSetChanged();
+                                        dialog.dismiss();
+
+                                    }
+                                });
+
+                                // show the dialog
+                                dialog = builder.create();
+                                dialog.show();
+                            }
+                        }).show();
                 return false;
             }
         });
@@ -73,9 +137,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.title_txt_detailed);
-            desc = itemView.findViewById(R.id.desc_txt_detailed);
-            date = itemView.findViewById(R.id.textView_date_detailed);
+            title = itemView.findViewById(R.id.title_txt);
+            desc = itemView.findViewById(R.id.desc_txt);
+            date = itemView.findViewById(R.id.textView_date);
             notes_container = itemView.findViewById(R.id.notes_container);
         }
     }
