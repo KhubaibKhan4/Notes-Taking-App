@@ -7,9 +7,22 @@
     android:layout_margin="10dp"
     tools:context=".NotesActivity">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar"
+        style="@style/Widget.AppCompat.Light.SearchView"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_margin="8dp"
+        android:background="@drawable/search_bg"
+        android:inputType="textAutoComplete"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search Notes Now" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="79dp" />
 
 </RelativeLayout>

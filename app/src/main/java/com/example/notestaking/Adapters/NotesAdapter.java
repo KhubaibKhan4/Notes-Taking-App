@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.example.notestaking.Models.Notes;
 import com.example.notestaking.NotesDetailedActivity;
 import com.example.notestaking.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("RecyclerView")
@@ -34,6 +36,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         this.context = context;
         this.notesList = notesList;
     }
+
+    public void setFilteredList(List<Notes> filteredList) {
+        this.notesList = filteredList;
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
@@ -130,6 +138,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         return notesList.size();
     }
 
+
     class viewHolder extends RecyclerView.ViewHolder {
         TextView title, desc, date;
         CardView notes_container;
@@ -143,4 +152,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
             notes_container = itemView.findViewById(R.id.notes_container);
         }
     }
+
+
 }
