@@ -1,6 +1,6 @@
 # Notes-Taking-App
 
-<img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230415_030840.png" width="50%"/> <img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230415_030254.png" width="50%"/>  <img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230415_030247.png" width="50%"/>
+<img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230415_030840.png" width="50%"/> <img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230415_030254.png" width="50%"/>  <img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230415_030247.png" width="50%"/>  <img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230417_163904.png" width="50%"/> <img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230417_164222.png" width="50%"/> <img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230417_164236.png" width="50%"/> <img src="https://github.com/KhubaibKhan4/Notes-Taking-App/blob/master/Screenshot_20230417_164625.png" width="50%"/>
     <h1>Notes Taking App with Room Persistence Library</h1>
     <p>This is a simple Android app for taking notes using the Room Persistence Library. The app allows users to create, read, update, and delete notes in a local SQLite database using the Room library.</p>
     <h2>Features</h2>
