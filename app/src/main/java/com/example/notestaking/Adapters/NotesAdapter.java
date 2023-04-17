@@ -26,6 +26,7 @@ import com.example.notestaking.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @SuppressLint("RecyclerView")
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> implements Filterable {
@@ -54,9 +55,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+        int colorCode = getRandomColor();
         holder.title.setText(notesList.get(position).getTitle());
         holder.desc.setText(notesList.get(position).getDesc());
         holder.date.setText(notesList.get(position).getDate());
+
+        holder.notes_container.setCardBackgroundColor(holder.itemView.getResources().getColor(colorCode));
         holder.notes_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,6 +136,21 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 return false;
             }
         });
+    }
+
+    private int getRandomColor() {
+        List<Integer> colorCode = new ArrayList<>();
+        colorCode.add(R.color.color1);
+        colorCode.add(R.color.color2);
+        colorCode.add(R.color.color3);
+        colorCode.add(R.color.color4);
+        colorCode.add(R.color.color5);
+        colorCode.add(R.color.color6);
+        colorCode.add(R.color.color7);
+
+        Random random = new Random();
+        int random_number = random.nextInt(colorCode.size());
+        return colorCode.get(random_number);
     }
 
     @Override
