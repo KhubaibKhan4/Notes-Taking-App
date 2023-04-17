@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.notestaking.Adapters.NotesAdapter;
 import com.example.notestaking.Common.DatabaseHelper;
 import com.example.notestaking.Models.Notes;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public class NotesActivity extends AppCompatActivity {
     NotesAdapter adapter;
     SearchView searchView;
     List<Notes> notesList;
+    FloatingActionButton addBtn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,6 +44,13 @@ public class NotesActivity extends AppCompatActivity {
         adapter = new NotesAdapter(this, notesList);
         recyclerView.setAdapter(adapter);
 
+        addBtn = (FloatingActionButton) findViewById(R.id.addBtn);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NotesActivity.this, MainActivity.class));
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -50,20 +60,12 @@ public class NotesActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterlist(newText);
+                adapter.getFilter().filter(newText);
                 return true;
             }
         });
 
     }
 
-    private void filterlist(String newText) {
-        List<Notes> filteredList = new ArrayList<>();
-        for (Notes notes : notesList) {
-            if (notes.getTitle().toLowerCase().contains(newText.toLowerCase())) {
-                filteredList.add(notes);
-            }
-        }
-       adapter.setFilteredList(filteredList);
-    }
+
 }
